@@ -1,0 +1,61 @@
+<?php
+if(file_exists("install/index.php")){header("Location: install/index.php");exit;}
+/*
+RedixCMS 4.0
+Ãëàâíûé ôàéë, çàïóñêàåìûé â ñàìîì íà÷àëå
+*/
+
+/* ÏÅÐÂÛÉ ÁËÎÊ: ÏÎÄÃÎÒÎÂÊÀ */
+session_cache_limiter('nocache');
+session_start(); // ñòàðòóåì ñåññèþ
+
+/* ÓÑÒÀÍÎÂÊÀ ÏÐÈ ÍÅÎÁÕÎÄÈÌÎÑÒÈ */
+if (file_exists('install.php')) {
+	require_once('install.php');
+	exit();
+}
+
+/* ÂÒÎÐÎÉ ÁËÎÊ: ÈÍÊËÓÄÛ */
+//ïîäêëþ÷àåì ôàéë êîíôèãà
+require_once("_config.php");
+//ïîäêëþ÷àåì ôàéë ãëîáàëüíûõ ôóíêöèé
+require_once("_system/_global_functions.php");
+//ïîäêëþ÷àåì ôàéë ïîëüçîâàòåëüñêèõ ôóíêöèé. Ýòè ôóíêöèè ïîïàäàþò â îñíîâíîé êëàññ
+require_once("_system/_core_user.php");
+//ïîäêëþ÷àåì ôàéë ðàáîòû ñ ÁÄ
+require_once("_system/_db_".DB_TYPE.".php");
+//ïîäêëþ÷àåì ôàéë ãëàâíîãî êëàññà
+require_once("_system/_core_".CMS_VERSION.".php");
+// ïîäêëþ÷àåì ôàéë ãëàâíîãî êëàññà
+require_once(ADMINDIRNAME."/_system/_adm_core_".ADM_VERSION.".php");
+
+/* ÒÐÅÒÈÉ ÁËÎÊ: ÎÏÐÅÄÅËÅÍÈÅ ÃËÎÁÀËÜÍÛÕ ÏÅÐÅÌÅÍÍÛÕ */
+//îïðåäåëÿåì îñíîâíîé êëàññ ÿäðà
+$core = new adm_core(ADMINDIRNAME);
+//ïðîâåðÿåò àâòîðèçàöèþ ïîëüçîâàòåëÿ
+$core->login();
+$core->prestart();
+
+/* ×ÅÒÂ¨ÐÒÛÉ ÁËÎÊ: ÔÎÐÌÈÐÎÂÀÍÈÅ ÑÒÐÀÍÈÖÛ */
+//íà÷àëè çàïèñü â áóôåð
+ob_start();
+
+$core->go_rss_show();
+
+//ïîëó÷èëè ñîäåðæèìîå áóôåðà
+$_TEXT = ob_get_contents();
+//î÷èñòèëè áóôåð
+ob_end_clean ();
+
+/* ÏßÒÛÉ ÁËÎÊ: ÇÀÂÅÐØÅÍÈÅ ÐÀÁÎÒÛ */
+//âûïîëíÿåì ãîëîâó
+$core->core_go_header();
+//âûâîäèì òåêñò
+$core->core_show_page($_TEXT);
+//ïèøåì ñòàòèñòèêó
+$core->core_write_statistic();
+//çàêðûâàåì êîííåêò ê ÁÄ
+$core->db_close();
+//echo $core->core_show_exec_time();
+$core->core_debug(0);
+?>

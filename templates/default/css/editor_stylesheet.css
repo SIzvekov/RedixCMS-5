@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* CSS Document */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,select,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,button,caption,cite,code,dfn,em,input,optgroup,option,select,strong,textarea,th,var{font:inherit}del,ins{text-decoration:none}li{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:baseline}sub{vertical-align:baseline}legend{color:#000}
+.clr{clear:both;}
+img{border-style:none;}
+a{text-decoration:none;color:#ac5700;}
+a:hover{text-decoration:underline;}
+table{border: 0px;border-collapse: collapse;}
+td{vertical-align:top;padding:0px;}
+html{height:100%;width:100%;margin:0px;padding:0px;}
+body{margin:0;padding:0;font:14px/20px Verdana, Arial, Helvetica, sans-serif;color:#564f46;background:#f5f3d3;width:740px;}
+h1{color: #725a2a;font-size:24px;font-family:Verdana;text-transform: uppercase;margin: -50px 5% 0;line-height:24px;}
+h2{}
+h3{}
+h4{}
+h5{}
+h6{}
+
+table{
+	border:1px solid #e5c18e;
+	font:12px/15px Verdana, Arial, Helvetica, sans-serif;
+	color:#564f46;
+	border-collapse: collapse;
+}
+th{
+	padding:2px;
+	border:1px solid #e5c18e;
+	background:#faf9e5;
+	vertical-align: middle;
+}
+td{
+	padding:2px;
+	border:1px solid #e5c18e;
+	vertical-align: middle;
+}

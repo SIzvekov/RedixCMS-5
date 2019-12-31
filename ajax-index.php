@@ -1,0 +1,45 @@
+<?php
+/* RedixCMS 4.0
+Ãëàâíûé ôàéë, çàïóñêàåìûé â ñàìîì íà÷àëå
+*/
+
+								///// ************* ÏÅÐÂÛÉ ÁËÎÊ: ÏÎÄÃÎÒÎÂÊÀ
+
+session_cache_limiter('nocache');
+session_start(); // ñòàðòóåì ñåññèþ
+
+
+								///// ************* ÂÒÎÐÎÉ ÁËÎÊ: ÈÍÊËÓÄÛ
+
+// ïîäêëþ÷àåì ôàéë êîíôèãà
+require_once("_config.php");
+// ïîäêëþ÷àåì ôàéë ãëîáàëüíûõ ôóíêöèé
+require_once("_system/_global_functions.php");
+
+// ïîäêëþ÷àåì ôàéë ïîëüçîâàòåëüñêèõ ôóíêöèé. Ýòè ôóíêöèè ïîïàäàþò â îñíîâíîé êëàññ
+require_once("_system/_core_user.php");
+
+// ïîäêëþ÷àåì ôàéë ðàáîòû ñ ÁÄ
+require_once("_system/_db_".DB_TYPE.".php");
+
+// ïîäêëþ÷àåì ôàéë ãëàâíîãî êëàññà
+require_once("_system/_core_".CMS_VERSION.".php");
+
+// ïîäêëþ÷àåì ôàéë ãëàâíîãî êëàññà
+require_once(ADMINDIRNAME."/_system/_adm_core_".ADM_VERSION.".php");
+
+								///// ************* ÒÐÅÒÈÉ ÁËÎÊ: ÎÏÐÅÄÅËÅÍÈÅ ÃËÎÁÀËÜÍÛÕ ÏÅÐÅÌÅÍÍÛÕ
+
+$core = new adm_core(ADMINDIRNAME, intval($_GET['isadm'])); // îïðåäåëÿåì îñíîâíîé êëàññ ÿäðà
+$core->thisajax = 1;
+$core->login(); // ïðîâåðÿåò àâòîðèçàöèþ ïîëüçîâàòåëÿ
+$core->prestart();
+
+								///// ************* ×ÅÒÂ¨ÐÒÛÉ ÁËÎÊ: ÔÎÐÌÈÐÎÂÀÍÈÅ ÑÒÐÀÍÈÖÛ
+$_RESULT = $core->core_go_ajaxpage();
+
+								///// ************* ÏßÒÛÉ ÁËÎÊ: ÇÀÂÅÐØÅÍÈÅ ÐÀÁÎÒÛ
+
+//çàêðûâàåì êîííåêò ê ÁÄ
+$core->db_close();
+?>

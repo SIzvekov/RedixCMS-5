@@ -1,0 +1,11 @@
+div.avtorizblockbottomline {
+    background: none !important;
+}
+
+.simpletxt p span img,
+.simpletxt p a img {
+    width: auto;
+    height: 39px;
+    font-size: 0;
+}
+

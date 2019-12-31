@@ -1,0 +1,1 @@
+<?echo $this->core_modul('text','avttext3')?>

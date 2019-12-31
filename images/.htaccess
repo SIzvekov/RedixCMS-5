@@ -1,0 +1,2 @@
+RemoveHandler .php .phtml .pl .shtml .shtm .cgi
+AddType text/plain .php .phtm .htm .html .phtml .pl .shtml .shtm .cgi
